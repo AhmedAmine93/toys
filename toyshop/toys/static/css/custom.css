@@ -1,0 +1,88 @@
+/* Importation de Bootstrap */
+@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css');
+
+/* Styles personnalisés */
+
+/* En-tête de page */
+header {
+  background-color: #f8f9fa;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Styles pour les listes de jouets */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  padding: 10px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+table th {
+  background-color: #f8f9fa;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Styles pour la page de détail du jouet */
+.toy-detail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.toy-detail img {
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+.toy-detail h1 {
+  margin-bottom: 10px;
+}
+
+.toy-detail p {
+  margin-bottom: 15px;
+}
+
+/* Styles pour la page de contact */
+.contact-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.contact-form input[type="text"],
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.contact-form button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Styles pour la page "À propos de nous" */
+.about-section {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Footer */
+footer {
+  background-color: #f8f9fa;
+  padding: 20px;
+  text-align: center;
+}

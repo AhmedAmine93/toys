@@ -1,0 +1,17 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/custom.css' %}?v2={{ request.META.HTTP_HOST }}&t={{ timestamp }}">
+<h1>Liste des jouets</h1>
+<ul>
+  {% for toy in toys %}
+  <li>
+    <a href="{% url 'toy_detail' toy.id %}">
+      <img src="{{ toy.image_url }}" alt="{{ toy.name }}">
+      <h3>{{ toy.name }}</h3>
+      <p>Prix : {{ toy.price }}</p>
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+
+
+

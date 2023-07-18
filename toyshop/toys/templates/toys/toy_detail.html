@@ -1,0 +1,17 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/custom.css' %}?v2={{ request.META.HTTP_HOST }}&t={{ timestamp }}">
+<h1>{{ toy.name }}</h1>
+<img src="{{ toy.image_url }}" alt="{{ toy.name }}">
+<p>Prix : {{ toy.price }}</p>
+<p>Âge minimum requis : {{ toy.age_restriction }}</p>
+<p>Description : {{ toy.description }}</p>
+{% if toy.toyvariant_set.exists %}
+<h2>Variantes :</h2>
+<ul>
+  {% for variant in toy.toyvariant_set.all %}
+  <li>{{ variant.color }} - {{ variant.support_type }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+

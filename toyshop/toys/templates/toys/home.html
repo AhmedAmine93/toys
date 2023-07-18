@@ -1,0 +1,11 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/custom.css' %}?v2={{ request.META.HTTP_HOST }}&t={{ timestamp }}">
+<h1>Bienvenue sur notre site de vente de jouets</h1>
+<p>Découvrez notre large sélection de jouets :</p>
+<ul>
+   {% for toy in toys %}
+<li>{{ toy.name }} - {{ toy.price }}</li>
+   {% endfor %}
+</ul>
+
+
