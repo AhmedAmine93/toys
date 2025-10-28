@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}DoctoToys{% endblock %}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" />
+    <link rel="stylesheet" href="{% static 'appointments/css/styles.css' %}" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="container">
+        <h1><a href="{% url 'appointments:home' %}">DoctoToys</a></h1>
+        <p>Réservez vos rendez-vous médicaux en quelques clics.</p>
+      </div>
+    </header>
+    <main class="container">
+      {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      {% block content %}{% endblock %}
+    </main>
+    <footer class="app-footer">
+      <div class="container">
+        <p>&copy; {% now "Y" %} DoctoToys - Votre plateforme de prise de rendez-vous.</p>
+      </div>
+    </footer>
+  </body>
+</html>

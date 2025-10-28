@@ -1,0 +1,43 @@
+{% extends "appointments/base.html" %}
+
+{% block title %}{{ specialty.name }} · DoctoToys{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb">
+  <a href="{% url 'appointments:home' %}">Accueil</a>
+  <span>/</span>
+  <span>{{ specialty.name }}</span>
+</nav>
+
+<section>
+  <h2>{{ specialty.name }}</h2>
+  {% if specialty.description %}
+    <p class="muted">{{ specialty.description }}</p>
+  {% endif %}
+</section>
+
+<section>
+  <h3>Praticiens</h3>
+  <div class="doctor-grid">
+    {% for doctor in doctors %}
+      <article class="card">
+        <h4><a href="{% url 'appointments:doctor' doctor.id %}">Dr {{ doctor.first_name }} {{ doctor.last_name }}</a></h4>
+        <p class="muted">{{ doctor.city }}</p>
+        <p>{{ doctor.bio|truncatewords:25 }}</p>
+        {% if doctor.next_slots %}
+          <ul class="slot-list">
+            {% for slot in doctor.next_slots %}
+              <li>{{ slot.start|date:"d/m/Y H:i" }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="muted">Aucun créneau disponible actuellement.</p>
+        {% endif %}
+        <a class="button" href="{% url 'appointments:doctor' doctor.id %}">Réserver un créneau</a>
+      </article>
+    {% empty %}
+      <p>Aucun praticien n'est disponible pour le moment dans cette spécialité.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
