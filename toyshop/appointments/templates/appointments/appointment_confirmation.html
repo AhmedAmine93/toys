@@ -1,0 +1,25 @@
+{% extends "appointments/base.html" %}
+
+{% block title %}Confirmation de rendez-vous · DoctoToys{% endblock %}
+
+{% block content %}
+<section class="confirmation">
+  <h2>Votre rendez-vous est confirmé</h2>
+  <p>Merci {{ appointment.patient_name }} ! Voici le récapitulatif de votre rendez-vous.</p>
+
+  <div class="summary-card">
+    <h3>Informations</h3>
+    <ul>
+      <li><strong>Praticien :</strong> Dr {{ appointment.doctor.first_name }} {{ appointment.doctor.last_name }}</li>
+      <li><strong>Spécialité :</strong> {{ appointment.doctor.specialty.name }}</li>
+      <li><strong>Date :</strong> {{ appointment.slot.start|date:"l d F Y" }}</li>
+      <li><strong>Heure :</strong> {{ appointment.slot.start|time:"H:i" }} - {{ appointment.slot.end|time:"H:i" }}</li>
+      <li><strong>Adresse :</strong> {{ appointment.doctor.full_address }}</li>
+      <li><strong>Motif :</strong> {{ appointment.reason }}</li>
+    </ul>
+  </div>
+
+  <p>Un e-mail de confirmation a été envoyé à {{ appointment.patient_email }}.</p>
+  <a class="button" href="{% url 'appointments:home' %}">Retour à l'accueil</a>
+</section>
+{% endblock %}

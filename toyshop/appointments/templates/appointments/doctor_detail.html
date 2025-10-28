@@ -1,0 +1,67 @@
+{% extends "appointments/base.html" %}
+
+{% block title %}Dr {{ doctor.first_name }} {{ doctor.last_name }} · DoctoToys{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb">
+  <a href="{% url 'appointments:home' %}">Accueil</a>
+  <span>/</span>
+  <a href="{% url 'appointments:specialty' doctor.specialty.id %}">{{ doctor.specialty.name }}</a>
+  <span>/</span>
+  <span>Dr {{ doctor.first_name }} {{ doctor.last_name }}</span>
+</nav>
+
+<section class="doctor-hero">
+  <div>
+    <h2>Dr {{ doctor.first_name }} {{ doctor.last_name }}</h2>
+    <p class="muted">{{ doctor.specialty.name }} · {{ doctor.city }}</p>
+    <p>{{ doctor.bio }}</p>
+  </div>
+  <div class="contact-card">
+    <h3>Coordonnées</h3>
+    <p>{{ doctor.full_address }}</p>
+    <p>Téléphone : <a href="tel:{{ doctor.phone_number }}">{{ doctor.phone_number }}</a></p>
+    <p>E-mail : <a href="mailto:{{ doctor.email }}">{{ doctor.email }}</a></p>
+  </div>
+</section>
+
+<section class="booking">
+  <h3>Prendre un rendez-vous</h3>
+  {% if available_slots %}
+    <form method="post" class="booking-form">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="form-grid">
+        <div class="form-field">
+          {{ form.patient_name.label_tag }}
+          {{ form.patient_name }}
+          {{ form.patient_name.errors }}
+        </div>
+        <div class="form-field">
+          {{ form.patient_email.label_tag }}
+          {{ form.patient_email }}
+          {{ form.patient_email.errors }}
+        </div>
+        <div class="form-field">
+          {{ form.patient_phone.label_tag }}
+          {{ form.patient_phone }}
+          {{ form.patient_phone.errors }}
+        </div>
+        <div class="form-field">
+          {{ form.reason.label_tag }}
+          {{ form.reason }}
+          {{ form.reason.errors }}
+        </div>
+      </div>
+      <fieldset class="slot-fieldset">
+        <legend>{{ form.slot.label }}</legend>
+        {{ form.slot }}
+        {{ form.slot.errors }}
+      </fieldset>
+      <button class="button" type="submit">Confirmer le rendez-vous</button>
+    </form>
+  {% else %}
+    <p>Aucun créneau n'est disponible pour le moment. Veuillez réessayer plus tard.</p>
+  {% endif %}
+</section>
+{% endblock %}
